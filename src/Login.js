@@ -8,14 +8,13 @@ function Login()
     const Form = styled.div`   
     display:flex;
     justify-content:center;
-        
+    margin-top:4vh;    
     input{
         // height:3vh;
         // width:15vw;
         border:none;
         background-color:lightgrey;
-    }
-    
+    } 
     button{
         border-radius:8px;
         border:none;
@@ -29,11 +28,6 @@ function Login()
     //   end
 
     //   function onSubmit(){
-
-    //     console.log("Success")
-    //     navigate("/logout")
-    //   }
-
     const onSubmit = async (data) => {
         try{
             const res = await axios.post(
@@ -42,19 +36,15 @@ function Login()
             );
             if(res.status === 200){
             navigate("/logout"); 
-            localStorage.setItem("user",JSON.stringify(res));
-            }
-            // else{
-            //     navigate("/"); 
-            //     alert("not registered");
-            // }
+            localStorage.setItem("userData",JSON.stringify(res));
+            localStorage.setItem("token",JSON.stringify(res.token));
 
+            }
         }catch(err){
                 console.log("err", err)
                 navigate("/"); 
-                alert("not registered");
-        }
-          
+                alert("Please enter valid Email and password");
+        }     
     }
     return( 
         // console.log("hello")
